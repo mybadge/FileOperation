@@ -85,25 +85,19 @@ struct PlistImageSearchRule: RegPatternSearchRule {
 }
 
 
-struct FileNameSearchRule {
-    //let extensions: [String] = ["j"]
-    let pattern = "[^\\d]+(\\d+)\\d*"
-    
-    func search(in content: String) -> [String] {
-        var result = [String]()
-        
-        let regex = try! NSRegularExpression(pattern: pattern, options: .caseInsensitive)
-        let groupMatches = regex.matches(in: content, options: [], range: content.fullRange)
-
-        for checkingResult in groupMatches {
-            if let range = Range(checkingResult.range(at: 1), in: content) {
-                let extracted = String(content[range])
-                result.append(extracted)
-            }
-        }
-        return result
-    }
+/// 从 bf0412眼前的世界是真实的，还是虚幻的？2.jpg 中 找到 bf0412
+struct FileNameSearchRule: RegPatternSearchRule {
+    let extensions: [String] = []
+    let patterns = ["[^\\d]+(\\d+)\\d*"]
 }
+
+/// /Users/zhaozhidan/WorkSpace/学习资料/得到/伯凡-认知方法论/4月/bf0412眼前的世界是真实的，还是虚幻的？2.jpg 中找到
+/// /Users/zhaozhidan/WorkSpace/学习资料/得到/伯凡-认知方法论/4月/
+struct FilePathSearchRule: RegPatternSearchRule {
+    let extensions = [String]()
+    let patterns = ["\\S*/\\d+月/"]
+}
+
 
 struct PbxprojImageSearchRule: RegPatternSearchRule {
     let extensions: [String]

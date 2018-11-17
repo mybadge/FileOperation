@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import PathKit
 
 extension String {
     var fullRange: NSRange {
@@ -14,3 +15,14 @@ extension String {
     }
 }
 
+
+extension Path {
+    /// 要操作的根路径
+    var operationRootPath: Path? {
+        if let rootPath = FilePathSearchRule().search(in: self.string).first {
+            return Path(rootPath)
+        }
+        return nil
+    }
+    
+}
