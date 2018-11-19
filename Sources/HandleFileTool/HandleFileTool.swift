@@ -25,6 +25,42 @@ struct HandleFileTool {
         }
     }
     
+    /// 删除空文件夹
+    public func deleteEmptyDic() {
+        do {
+            let childPaths = try executionPath.children()
+            print("childPaths=\(childPaths)".green)
+            
+            let allFiles = try executionPath.recursiveChildren().filter({
+                $0.isDirectory && (try! $0.children().count == 0)
+            })
+            for path in allFiles {
+                print("\(path) 需要删除 \n".blue)
+                try path.delete()
+            }
+        } catch {
+            print("error=\(error)")
+        }
+    }
+    
+    public func nativeMoveFile() {
+        for i in 1...10 {
+            let name = "fileName\(i)"
+            let newDir = Path(executionPath.string + "/" + name)
+            if !newDir.isDirectory {
+                try! newDir.mkdir()
+                print("\(newDir)".blue)
+            }
+            
+            if i % 2 == 0 {
+                //let flieName = "fileName\(i-1)"
+                let newFileDir = Path("/Users/moka/Desktop/首页切图")
+                try! newDir.move(newFileDir)
+            }
+        }
+        
+    }
+    
     
     func handleName(_ str: String) {
         let path = Path(str)
@@ -39,18 +75,18 @@ struct HandleFileTool {
         let maxLen = range.location+range.length
         let dicName = String(name.prefix(maxLen))
         print("fileName=\(dicName)")
-        guard let needDic = path.operationRootPath else {
+        guard let needDir = path.operationRootPath else {
             print("没有找到根目录".red)
             return
         }
         do {
-            let newDic: Path = Path(needDic.string + dicName)
+            let newDir: Path = Path(needDir.string + dicName)
             
-            if !newDic.isDirectory {
-                try newDic.mkdir()
+            if !newDir.isDirectory {
+                try newDir.mkdir()
             }
-            if newDic.isDirectory {
-                FileMove.move(atPath: path.string, toPath: newDic.string)
+            if newDir.isDirectory {
+                FileMove.move(atPath: path.string, toPath: newDir.string)
             }
         } catch {
             print("error=\(error)".bold)
@@ -76,7 +112,7 @@ struct FileMove {
         p.launch()
         
         let data = fileHandler.readDataToEndOfFile()
-        if let string = String(data: data, encoding: .utf8) {
+        if let string = String(data: data, encoding: .utf8), string.count > 0 {
             print("command error = \(string)".green)
         }
     }

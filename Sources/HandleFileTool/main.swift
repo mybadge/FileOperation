@@ -49,11 +49,14 @@ if help.value {
 }
 
 let project = projectOption.value ?? "."
-let resourceExtensions = resourceExtensionsOption.value ?? ["mp3", "jpg", "png"]
+let resourceExtensions = resourceExtensionsOption.value ?? ["mp3", "jpg", "png", "m4a"]
 let fileExtensions = fileExtensionsOption.value ?? ["swift", "m", "mm", "xib", "storyboard"]
 let excludedPaths = excludePathsOption.value ?? []
 
+let rootPath = "/Users/moka/WorkSpace/得到/精英日课的副本"
 
-let tool = HandleFileTool.init(executionPath: project, extensions: resourceExtensions)
+let tool = HandleFileTool.init(executionPath: rootPath, extensions: resourceExtensions)
 
-tool.moveFile()
+//tool.moveFile()
+tool.deleteEmptyDic()
+//tool.nativeMoveFile()

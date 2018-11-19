@@ -25,7 +25,7 @@
 import Foundation
 
 protocol FileSearchRule {
-    func search(in cotnent: String) -> Set<String>
+    func search(in cotnent: String) -> [String]
 }
 
 protocol RegPatternSearchRule: FileSearchRule {
@@ -34,18 +34,18 @@ protocol RegPatternSearchRule: FileSearchRule {
 }
 
 extension RegPatternSearchRule {
-    func search(in content: String) -> Set<String> {
+    func search(in content: String) -> [String] {
         
         let nsstring = NSString(string: content)
-        var result = Set<String>()
+        var result = [String]()
         
         for pattern in patterns {
             let reg = try! NSRegularExpression(pattern: pattern, options: .caseInsensitive)
             
             let matches = reg.matches(in: content, options: [], range: content.fullRange)
             for checkingResult in matches {
-                let extracted = nsstring.substring(with: checkingResult.range(at: 1))
-                result.insert(extracted)
+                let extracted = nsstring.substring(with: checkingResult.range(at: 0))
+                result.append(extracted)
             }
         }
         return result
@@ -88,7 +88,7 @@ struct PlistImageSearchRule: RegPatternSearchRule {
 /// 从 bf0412眼前的世界是真实的，还是虚幻的？2.jpg 中 找到 bf0412
 struct FileNameSearchRule: RegPatternSearchRule {
     let extensions: [String] = []
-    let patterns = ["[^\\d]+(\\d+)\\d*"]
+    let patterns = ["[^\\d]+(\\d+)\\d*?"]
 }
 
 /// /Users/zhaozhidan/WorkSpace/学习资料/得到/伯凡-认知方法论/4月/bf0412眼前的世界是真实的，还是虚幻的？2.jpg 中找到
