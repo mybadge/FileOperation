@@ -53,10 +53,15 @@ let resourceExtensions = resourceExtensionsOption.value ?? ["mp3", "jpg", "png",
 let fileExtensions = fileExtensionsOption.value ?? ["swift", "m", "mm", "xib", "storyboard"]
 let excludedPaths = excludePathsOption.value ?? []
 
-let rootPath = "/Users/moka/WorkSpace/得到/精英日课的副本"
+//let rootPath = "/Users/moka/WorkSpace/得到/精英日课的副本"
 
-let tool = HandleFileTool.init(executionPath: rootPath, extensions: resourceExtensions)
+if project == "." {
+    print("please input `-p`".red.bold)
+    exit(EX_USAGE)
+}
 
-//tool.moveFile()
+let tool = HandleFileTool.init(executionPath: project, extensions: resourceExtensions)
+
+tool.moveFile()
 tool.deleteEmptyDic()
 //tool.nativeMoveFile()
