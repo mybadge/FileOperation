@@ -65,4 +65,8 @@ let tool = HandleFileTool.init(executionPath: project, extensions: resourceExten
 
 tool.moveFile()
 tool.deleteEmptyDic()
-//tool.nativeMoveFile()
+tool.nativeMoveFile()
+
+
+//tool.searchFile(search: ": SPViewController")
+

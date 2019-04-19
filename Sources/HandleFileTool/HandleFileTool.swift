@@ -93,6 +93,37 @@ struct HandleFileTool {
             print("error=\(error)".bold)
         }
     }
+    
+    func searchFile(search: String) {
+        let rootPath = "/Users/shangp/workspace/compony/ShangpinApp/ShangPin/ShangPin/ShangPin"
+        let proces = FileSearchProcess(path: rootPath, searchStr: search)
+        let sets = proces.execute()
+        //print("\(sets)".blue)
+        let needHandArr = sets.compactMap { $0.components(separatedBy: ":").first }.compactMap({Path($0)})
+        //print(needHandArr)
+        
+        guard let fileName = needHandArr.last?.lastComponentWithoutExtension else {
+            return
+        }
+        handleModifyFile(rootPath: rootPath, modififyStr: fileName)
+    }
+    
+    func handleModifyFile(rootPath: String, modififyStr: String) {
+        let proces = FileSearchProcess(path: rootPath, searchStr: modififyStr)
+        let sets = proces.execute()
+        print("\(sets)".blue)
+        
+        /**
+         需要处理的：
+         1、#import "SPRechargeResultViewController.h"
+         2、4CFDFF391D781A8300BEDFD5 /* SPRechargeResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPRechargeResultViewController.h; sourceTree = "<group>"; };
+         3、4CFDFF551D781A8300BEDFD5 /* SPRechargeResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDFF3A1D781A8300BEDFD5 /* SPRechargeResultViewController.m */; };
+         4、SPRechargeResultViewController *comfirmVC = [[SPRechargeResultViewController alloc] initWithPayConfirmationModel:checkModel];
+         5、@interface SPRechargeResultViewController ()
+         6、@implementation SPRechargeResultViewController
+         7、SPRechargeResultViewController *comfirmVC = SPRechargeResultViewController.new;
+         */
+    }
 }
 
 struct FileMove {
