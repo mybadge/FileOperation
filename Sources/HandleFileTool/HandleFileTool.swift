@@ -37,7 +37,7 @@ struct HandleFileTool {
             for path in allFiles {
                 print("\(path) 需要删除 \n".blue)
                 // TODO 询问是否删除, 如果要删除, 才删除
-                //try path.delete()
+                try path.delete()
             }
         } catch {
             print("error=\(error)")

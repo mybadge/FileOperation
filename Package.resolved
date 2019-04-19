@@ -3,11 +3,11 @@
     "pins": [
       {
         "package": "CommandLine",
-        "repositoryURL": "https://github.com/jatoben/CommandLine.git",
+        "repositoryURL": "https://github.com/570262616/CommandLine",
         "state": {
           "branch": null,
-          "revision": "73048b666be97d122109276a1b8a69ec407cdb13",
-          "version": "3.0.0-pre1"
+          "revision": "6f2201642396364f2028cd7926e05823d04c1571",
+          "version": "5.0.4"
         }
       },
       {

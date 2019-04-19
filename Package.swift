@@ -13,7 +13,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/onevcat/Rainbow.git", from: "3.1.4"),
-        .package(url: "https://github.com/jatoben/CommandLine.git", from: "3.0.0-pre1"),
+        .package(url: "https://github.com/570262616/CommandLine", from: "5.0.4"),
         .package(url: "https://github.com/kylef/Spectre.git", from: "0.8.0"),
         .package(url: "https://github.com/kylef/PathKit.git", from: "0.9.2")
     ],

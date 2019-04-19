@@ -6,10 +6,11 @@
 //
 
 import Foundation
-import CommandLineKit
+import CommandLine
+
 import Rainbow
 
-let cli = CommandLineKit.CommandLine()
+let cli = CommandLine()
 
 let projectOption = StringOption(
     shortFlag: "p", longFlag: "project", helpMessage: "Path to the project.")
