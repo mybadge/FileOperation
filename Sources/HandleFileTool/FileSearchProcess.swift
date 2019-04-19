@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import PathKit
+//import PathKit
 
 public class FileSearchProcess: NSObject {
     let p: Process
@@ -46,36 +46,6 @@ public class FileSearchProcess: NSObject {
 }
 
 
-public class FileModifyProcess: NSObject {
-    let p: Process
 
-    init(path: String, originalStr: String, modifyStr: String) {
-        
-        ///sed -i "" "s/originalStr/modifyStr/g" /usr/username/path/
-        p = Process()
-        p.launchPath = "/usr/bin/sed"
-        var args = [String]()
-        args.append("-i")
-        args.append("")
-        args.append("s/\(originalStr)/\(modifyStr)/g")
-        args.append(path)
-        p.arguments = args
-    }
-    
-    func execute() -> Set<String> {
-        let pipe = Pipe()
-        p.standardOutput = pipe
-        
-        let fileHandler = pipe.fileHandleForReading
-        p.launch()
-        
-        let data = fileHandler.readDataToEndOfFile()
-        if let string = String(data: data, encoding: .utf8) {
-            return Set(string.components(separatedBy: "\n").dropLast())
-        } else {
-            return []
-        }
-    }
-}
 
 
