@@ -17,3 +17,10 @@ get started, create a directory and run `swift package init` command:
     $ swift package init # or swift package init --type library
     $ swift build
     $ swift test
+
+
+### generate-xcodeproj
+
+if need generate-xcodeproj use  `swift package generate-xcodeproj` command
+
+    swift package generate-xcodeproj
